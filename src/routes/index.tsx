@@ -1,29 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/lifecycle/Hero";
+import { MaterialExtraction } from "@/components/lifecycle/MaterialExtraction";
+import { Manufacturing } from "@/components/lifecycle/Manufacturing";
+import { Distribution } from "@/components/lifecycle/Distribution";
+import { EWaste } from "@/components/lifecycle/EWaste";
+import { Reflection } from "@/components/lifecycle/Reflection";
+import { ProgressNav } from "@/components/lifecycle/ProgressNav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Silicon Footprint — The hidden cost of AI hardware" },
+      { name: "description", content: "An interactive exhibit on the environmental life cycle of AI hardware — from raw earth to e-waste." },
+      { property: "og:title", content: "Silicon Footprint — The hidden cost of AI hardware" },
+      { property: "og:description", content: "Explore extraction, fabrication, distribution and e-waste behind the chips powering AI." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const start = () => {
+    document.getElementById("extraction")?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative min-h-screen overflow-x-hidden">
+      <ProgressNav />
+      <Hero onStart={start} />
+      <MaterialExtraction />
+      <Manufacturing />
+      <Distribution />
+      <EWaste />
+      <Reflection />
+      <footer className="border-t border-neon/10 py-10 text-center text-xs text-muted-foreground">
+        <div className="font-mono uppercase tracking-widest">silicon footprint · interactive exhibit · v1.0</div>
+        <div className="mt-2">Figures illustrative · placeholder data for prototype purposes</div>
+      </footer>
+    </main>
   );
 }
