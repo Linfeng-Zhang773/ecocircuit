@@ -257,4 +257,3 @@
 .animate-float { animation: float 5s ease-in-out infinite; }
 .animate-spin-slow { animation: spin-slow 30s linear infinite; }
 .animate-spin-slower { animation: spin-slow 80s linear infinite; }
-}
