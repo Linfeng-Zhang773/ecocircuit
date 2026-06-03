@@ -93,9 +93,9 @@ export function Hero({ onStart }: { onStart: () => void }) {
           className="mt-16 grid max-w-xl grid-cols-3 gap-3"
         >
           {[
-            { v: "626k", l: "tons CO₂e / large model" },
-            { v: "2,200L", l: "water per chip wafer" },
-            { v: "62Mt", l: "global e-waste / year" },
+            { v: "796 kg", l: "CO₂e to build one AI chip" },
+            { v: "38M L", l: "water per chip fab, daily" },
+            { v: "62 Mt", l: "global e-waste / year" },
           ].map((s) => (
             <div key={s.l} className="glass rounded-xl p-3">
               <div className="text-xl font-semibold neon-text font-mono">{s.v}</div>

@@ -73,11 +73,11 @@ export function EWaste() {
           </div>
           <div className="mt-4 flex gap-3 text-xs">
             <div className="flex-1 rounded-lg bg-deep/60 p-3">
-              <div className="text-toxic font-mono text-lg">22%</div>
+              <div className="text-toxic font-mono text-lg">22.3%</div>
               <div className="text-muted-foreground">formally recycled</div>
             </div>
             <div className="flex-1 rounded-lg bg-deep/60 p-3">
-              <div className="text-toxic font-mono text-lg">78%</div>
+              <div className="text-toxic font-mono text-lg">77.7%</div>
               <div className="text-muted-foreground">leaks / dumped</div>
             </div>
           </div>
@@ -160,10 +160,10 @@ export function EWaste() {
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatCard value="62 Mt" label="E-waste / year" />
-        <StatCard value="$57B" label="Recoverable materials lost" />
-        <StatCard value="2.6 yrs" label="Avg. phone lifespan" />
-        <StatCard value="1000 yrs" label="Plastic in landfill" />
+        <StatCard value="62 Mt" label="Global e-waste / year" hint="2022 (ITU/UNITAR)" />
+        <StatCard value="22.3%" label="Formally recycled" hint="the rest dumped or burned" />
+        <StatCard value="5–7 yr" label="Typical laptop lifespan" hint="enterprise AI HW replaced faster" />
+        <StatCard value="Pb · Hg · Cd" label="Toxins from informal recycling" hint="open burning & acid stripping" />
       </div>
     </SectionShell>
   );

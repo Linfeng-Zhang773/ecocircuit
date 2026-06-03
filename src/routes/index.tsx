@@ -34,7 +34,7 @@ function Index() {
       <Reflection />
       <footer className="border-t border-neon/10 py-10 text-center text-xs text-muted-foreground">
         <div className="font-mono uppercase tracking-widest">silicon footprint · interactive exhibit · v1.0</div>
-        <div className="mt-2">Figures illustrative · placeholder data for prototype purposes</div>
+        <div className="mt-2">Figures from “The Hidden Costs of AI: Hardware Production &amp; Supply Chains” · UCSD, 2026</div>
       </footer>
     </main>
   );

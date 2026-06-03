@@ -12,22 +12,22 @@ import {
 } from "recharts";
 
 const DATA = [
-  { name: "Air", co2: 2.1 },
-  { name: "Ocean", co2: 0.4 },
-  { name: "Truck", co2: 1.2 },
-  { name: "Rail", co2: 0.3 },
+  { name: "Taiwan IC", co2: 63 },
+  { name: "TSMC", co2: 67.6 },
+  { name: "China REE", co2: 70 },
+  { name: "DRC Co", co2: 70 },
 ];
 
 const ROUTES = [
-  { from: [76, 42], to: [38, 30], label: "Taiwan → EU" },
-  { from: [76, 42], to: [22, 38], label: "Taiwan → US" },
-  { from: [22, 38], to: [38, 30], label: "US → EU" },
-  { from: [76, 42], to: [80, 70], label: "Taiwan → AU" },
+  { from: [53, 58], to: [76, 42], label: "DR Congo → China" },
+  { from: [76, 42], to: [22, 38], label: "China → US" },
+  { from: [76, 42], to: [42, 26], label: "China → EU / Japan" },
+  { from: [76, 42], to: [80, 64], label: "Taiwan → Asia hubs" },
 ];
 
 export function Distribution() {
-  const [distance, setDistance] = useState(8000);
-  const footprint = ((distance / 1000) * 0.6).toFixed(2);
+  const [distance, setDistance] = useState(50000);
+  const crossings = Math.round((distance / 50000) * 70);
 
   return (
     <SectionShell
@@ -35,7 +35,7 @@ export function Distribution() {
       index={3}
       kicker="Chapter 03 · Logistics"
       title="Atoms moving the bits."
-      description="Packed, palleted, flown. A single GPU may cross four continents before it lights up a data centre rack."
+      description="A single chip's components travel more than 50,000 km and cross borders roughly 70 times — ore mined in Africa, refined in Asia, sold to firms in the US, EU, and Japan."
     >
       <div className="grid gap-6 lg:grid-cols-5">
         <div className="lg:col-span-3 glass rounded-3xl p-6 relative overflow-hidden">
@@ -79,29 +79,29 @@ export function Distribution() {
 
         <div className="lg:col-span-2 space-y-4">
           <div className="glass rounded-3xl p-6">
-            <div className="text-xs uppercase tracking-widest text-neon">Footprint calculator</div>
-            <h3 className="mt-2 text-lg font-semibold">Ship a 2kg device {distance.toLocaleString()} km</h3>
+            <div className="text-xs uppercase tracking-widest text-neon">Chip journey</div>
+            <h3 className="mt-2 text-lg font-semibold">Components travel {distance.toLocaleString()} km</h3>
             <input
               type="range"
-              min={500}
-              max={20000}
-              step={500}
+              min={5000}
+              max={50000}
+              step={1000}
               value={distance}
               onChange={(e) => setDistance(Number(e.target.value))}
               className="mt-5 w-full accent-[color:var(--neon)]"
             />
             <motion.div
-              key={footprint}
+              key={crossings}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="mt-4 text-4xl neon-text font-mono"
             >
-              {footprint} <span className="text-sm">kg CO₂e</span>
+              ~{crossings} <span className="text-sm">border crossings</span>
             </motion.div>
           </div>
 
           <div className="glass rounded-3xl p-6">
-            <div className="text-xs uppercase tracking-widest text-neon">kg CO₂e per ton-km</div>
+            <div className="text-xs uppercase tracking-widest text-neon">Supply-chain concentration (%)</div>
             <div className="mt-3 h-44">
               <ResponsiveContainer>
                 <BarChart data={DATA}>
@@ -125,10 +125,10 @@ export function Distribution() {
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatCard value="3.4Mt" label="Packaging waste / yr" hint="Consumer electronics" />
-        <StatCard value="42 days" label="Avg. sea transit" hint="Asia → Europe" />
-        <StatCard value="11×" label="Air vs ocean CO₂" />
-        <StatCard value="68%" label="Plastic in packaging" />
+        <StatCard value="50,000 km" label="One chip's journey" hint="before final use" />
+        <StatCard value="~70" label="Border crossings / chip" hint="globalized supply chain" />
+        <StatCard value="800B L" label="Data-center water, 2023" hint="~140B L onsite cooling" />
+        <StatCard value="≈100%" label="Congolese cobalt → China" hint="for refining" />
       </div>
     </SectionShell>
   );

@@ -10,6 +10,14 @@ const STEPS = [
   { id: "test", name: "Test & burn-in", energy: 14, water: 100, detail: "Every chip is stress-tested at extreme temperatures." },
 ];
 
+const TPUS = [
+  { id: "v4i", name: "TPU v4i", mfg: 285, embodied: 386 },
+  { id: "v5e", name: "TPU v5e", mfg: 285, embodied: 402 },
+  { id: "v4", name: "TPU v4", mfg: 513, embodied: 693 },
+  { id: "v6e", name: "TPU v6e", mfg: 523, embodied: 692 },
+  { id: "v5p", name: "TPU v5p", mfg: 796, embodied: 1010 },
+];
+
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [n, setN] = useState(0);
   useEffect(() => {
@@ -34,9 +42,8 @@ function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
 
 export function Manufacturing() {
   const [active, setActive] = useState(0);
-  const [energy, setEnergy] = useState(50);
-
-  const yearlyEmissions = Math.round(energy * 12.4);
+  const [gen, setGen] = useState(4);
+  const tpu = TPUS[gen];
 
   return (
     <SectionShell
@@ -44,7 +51,7 @@ export function Manufacturing() {
       index={2}
       kicker="Chapter 02 · Fab"
       title="Inside the clean room."
-      description="A modern fab consumes more power than a small city and more ultra-pure water than 30,000 homes. One wafer, thousands of process steps."
+      description="A single fab consumes roughly 38 million litres of ultra-pure water a day. In 2020 Taiwan's chip sector used more electricity than the whole island generated from renewables — on a grid still ~45% coal."
     >
       <div className="grid gap-6 lg:grid-cols-5">
         {/* Pipeline */}
@@ -61,14 +68,12 @@ export function Manufacturing() {
                 <button
                   key={s.id}
                   onClick={() => setActive(i)}
-                  className={`relative flex flex-col items-center gap-3 rounded-xl p-3 transition ${
-                    active === i ? "bg-neon/10 neon-border" : "hover:bg-surface-2"
-                  }`}
+                  className={`relative flex flex-col items-center gap-3 rounded-xl p-3 transition ${active === i ? "bg-neon/10 neon-border" : "hover:bg-surface-2"
+                    }`}
                 >
                   <div
-                    className={`grid h-12 w-12 place-items-center rounded-lg font-mono text-sm ${
-                      active === i ? "bg-neon text-primary-foreground neon-glow" : "bg-surface-2 text-neon"
-                    }`}
+                    className={`grid h-12 w-12 place-items-center rounded-lg font-mono text-sm ${active === i ? "bg-neon text-primary-foreground neon-glow" : "bg-surface-2 text-neon"
+                      }`}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </div>
@@ -120,30 +125,34 @@ export function Manufacturing() {
         {/* Sliders / stats */}
         <div className="lg:col-span-2 space-y-4">
           <div className="glass rounded-3xl p-6">
-            <div className="text-xs uppercase tracking-widest text-neon">Simulator</div>
-            <h3 className="mt-2 text-xl font-semibold">Run a fab at {energy}% capacity</h3>
-            <input
-              type="range"
-              min={10}
-              max={100}
-              value={energy}
-              onChange={(e) => setEnergy(Number(e.target.value))}
-              className="mt-5 w-full accent-[color:var(--neon)]"
-            />
-            <div className="mt-4 flex items-end justify-between">
+            <div className="text-xs uppercase tracking-widest text-neon">Per-chip footprint · Google TPU LCA</div>
+            <h3 className="mt-2 text-xl font-semibold">{tpu.name}</h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {TPUS.map((t, i) => (
+                <button
+                  key={t.id}
+                  onClick={() => setGen(i)}
+                  className={`rounded-full px-3 py-1.5 text-xs font-mono transition ${gen === i ? "bg-neon text-primary-foreground neon-glow" : "bg-surface-2 text-neon hover:bg-neon/10"
+                    }`}
+                >
+                  {t.name}
+                </button>
+              ))}
+            </div>
+            <div className="mt-5 flex items-end justify-between">
               <div>
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Annual CO₂e</div>
-                <div className="text-3xl neon-text font-mono">{yearlyEmissions.toLocaleString()}<span className="text-sm"> kt</span></div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Manufacturing CO₂e</div>
+                <div className="text-3xl neon-text font-mono">{tpu.mfg}<span className="text-sm"> kg</span></div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">≈ flights NYC→LON</div>
-                <div className="text-xl font-mono">{Math.round(yearlyEmissions * 2.3).toLocaleString()}</div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">6-yr embodied</div>
+                <div className="text-xl font-mono">{tpu.embodied.toLocaleString()} kg</div>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <StatCard value="100MW" label="Single fab draw" hint="Continuous" />
-            <StatCard value="9 nines" label="Water purity needed" hint="99.9999999%" />
+            <StatCard value="63%" label="Global IC foundry output" hint="Taiwan, 2021" />
+            <StatCard value="70.6M m³" label="TSMC water use, 2015–20" hint="+108% in 6 years" />
           </div>
         </div>
       </div>

@@ -3,16 +3,17 @@ import { motion } from "framer-motion";
 import { SectionShell } from "./SectionShell";
 
 const CHOICES = [
-  { id: "renew", title: "Renewable-powered fabs", impact: 30, label: "Solar + wind for chip fabs" },
-  { id: "reuse", title: "Modular, repairable hardware", impact: 22, label: "Design for upgrade, not replacement" },
-  { id: "recycle", title: "Closed-loop recycling", impact: 18, label: "Recover 95% of critical minerals" },
-  { id: "model", title: "Smaller, smarter models", impact: 25, label: "Distillation beats brute force" },
+  { id: "cf", title: "90% carbon-free fabs", tag: "≈20× potential cut", impact: 40, label: "Clean grids + hardware + software gains could cut carbon per AI workload ~20×" },
+  { id: "soft", title: "Smaller, smarter models", tag: "3× CCI gain", impact: 25, label: "Compute-carbon-intensity improved 3× from TPU v4i to v6e" },
+  { id: "water", title: "Nanofiltration of fab water", tag: "97% PFAS removed", impact: 20, label: "90% water recovery at pilot scale" },
+  { id: "epr", title: "Extended producer responsibility", tag: "binding e-waste rules", impact: 15, label: "Hold makers responsible; halt exports to weak-regulation states" },
 ];
 
-const POLL = [
-  { label: "Yes, urgently", v: 62 },
-  { label: "Somewhat", v: 28 },
-  { label: "Not sure", v: 10 },
+const POLICIES = [
+  { name: "US Dodd-Frank Act", year: "2010" },
+  { name: "EU Conflict Minerals Reg.", year: "2017/821" },
+  { name: "EU Due Diligence Directive", year: "2022" },
+  { name: "Transparency Initiative (EITI)", year: "ongoing" },
 ];
 
 export function Reflection() {
@@ -50,7 +51,7 @@ export function Reflection() {
                   <div className="absolute right-4 top-4 grid h-7 w-7 place-items-center rounded-full border border-neon/40 text-xs">
                     {on ? "✓" : "+"}
                   </div>
-                  <div className="text-xs uppercase tracking-widest text-neon">−{c.impact}% impact</div>
+                  <div className="text-xs uppercase tracking-widest text-neon">{c.tag}</div>
                   <h4 className="mt-2 text-lg font-semibold">{c.title}</h4>
                   <p className="mt-1 text-sm text-muted-foreground">{c.label}</p>
                 </button>
@@ -81,24 +82,13 @@ export function Reflection() {
           </div>
 
           <div className="glass rounded-3xl p-6">
-            <div className="text-xs uppercase tracking-widest text-neon">community poll</div>
-            <div className="mt-1 text-sm">Should AI hardware emissions be disclosed?</div>
+            <div className="text-xs uppercase tracking-widest text-neon">policy levers</div>
+            <div className="mt-1 text-sm">Existing rules aimed at the supply chain</div>
             <div className="mt-4 space-y-3">
-              {POLL.map((p) => (
-                <div key={p.label}>
-                  <div className="flex items-center justify-between text-xs">
-                    <span>{p.label}</span>
-                    <span className="font-mono text-neon">{p.v}%</span>
-                  </div>
-                  <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-surface-2">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${p.v}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1 }}
-                      className="h-full bg-neon"
-                    />
-                  </div>
+              {POLICIES.map((p) => (
+                <div key={p.name} className="flex items-center justify-between gap-3 text-xs">
+                  <span className="text-foreground/90">{p.name}</span>
+                  <span className="shrink-0 font-mono text-neon">{p.year}</span>
                 </div>
               ))}
             </div>

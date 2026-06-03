@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { SectionShell, StatCard } from "./SectionShell";
 
 const HOTSPOTS = [
-  { id: "drc", name: "DR Congo", material: "Cobalt", x: 53, y: 58, impact: "70% of global cobalt", danger: "high" },
-  { id: "cl", name: "Chile", material: "Lithium", x: 28, y: 72, impact: "Salt flat brine extraction", danger: "high" },
-  { id: "cn", name: "China", material: "Rare earths", x: 76, y: 42, impact: "85% of refining", danger: "medium" },
-  { id: "au", name: "Australia", material: "Silicon / Lithium", x: 82, y: 70, impact: "Largest hard-rock Li source", danger: "medium" },
-  { id: "id", name: "Indonesia", material: "Nickel", x: 78, y: 60, impact: "Rainforest clearance", danger: "high" },
-  { id: "br", name: "Brazil", material: "Niobium", x: 36, y: 64, impact: "Strategic capacitor metal", danger: "low" },
+  { id: "drc", name: "DR Congo", material: "Cobalt", x: 53, y: 58, impact: "70% of mined cobalt · ~half of reserves", danger: "high" },
+  { id: "cn", name: "China", material: "Rare earths", x: 76, y: 42, impact: "Refines ~70% · holds ~40% of reserves", danger: "high" },
+  { id: "in", name: "India", material: "Silica", x: 68, y: 49, impact: "Silica mining: 10–20% silicosis in workers", danger: "high" },
+  { id: "id", name: "Indonesia", material: "Nickel", x: 80, y: 62, impact: "Among 4 nations = 80% of mining deforestation", danger: "high" },
+  { id: "zm", name: "Zambia", material: "Copper", x: 54, y: 66, impact: "African Copperbelt: copper & cobalt", danger: "medium" },
+  { id: "br", name: "Brazil", material: "Iron ore", x: 34, y: 64, impact: "Brumadinho dam collapse: 270 killed (2019)", danger: "high" },
 ];
 
 const MATERIALS = [
@@ -109,10 +109,10 @@ export function MaterialExtraction() {
 
         {/* Stats column */}
         <div className="lg:col-span-2 grid grid-cols-2 gap-4">
-          <StatCard value="40k+" label="Children in cobalt mines" hint="Amnesty Intl. estimates" />
-          <StatCard value="500k L" label="Water per ton of lithium" hint="Salt flat evaporation" />
-          <StatCard value="−83%" label="Local aquifer levels" hint="Atacama, Chile" />
-          <StatCard value="2.5kg" label="CO₂ per kg refined Co" hint="Smelting only" />
+          <StatCard value="60+" label="Minerals in one device" hint="modern AI hardware" />
+          <StatCard value="14B t" label="Mining tailings / year" hint="global (GTR 2020)" />
+          <StatCard value="270" label="Killed, Brumadinho dam" hint="Brazil, 2019" />
+          <StatCard value="10–20%" label="Silicosis in silica miners" hint="India · S. Africa · China" />
         </div>
       </div>
 
