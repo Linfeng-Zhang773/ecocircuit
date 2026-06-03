@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SectionShell, StatCard } from "./SectionShell";
+import { SectionShell, StatCard, GlossaryTerm } from "./SectionShell";
 
 const ITEMS = [
   { id: "phone", name: "Smartphone", bin: "recycle" },
@@ -15,6 +15,24 @@ const BINS = [
   { id: "recycle", label: "Recyclable", color: "neon" },
   { id: "hazard", label: "Hazardous", color: "toxic" },
 ];
+
+const ITEM_DEFS: Record<string, string> = {
+  phone: "Contains 60+ minerals including gold, silver, cobalt, and rare earths. Certified e-waste recyclers can recover these metals — but only 22.3% of global e-waste ever reaches formal recycling.",
+  battery: "Li-ion batteries use cobalt, lithium, nickel, and manganese. Flammable electrolytes and toxic metals make them strictly regulated hazardous waste requiring specialized handling.",
+  gpu: "AI companies replace GPUs every 2–4 years due to performance competition. A single data center refresh can discard thousands of units simultaneously — industrial-scale e-waste.",
+  cable: "Contains copper wire, aluminum shielding, and various plastics. When discarded in landfills, copper leaches into soil and non-biodegradable plastics persist for centuries.",
+  screen: "CRT (cathode ray tube) monitors contain 1.5–4 kg of lead in the glass panel, plus mercury and cadmium — making them among the most hazardous e-waste items.",
+  board: "Contains recoverable gold (connectors), silver (solder), and copper (traces), but also lead solder and brominated flame retardants (BFRs) that require careful certified handling.",
+};
+
+const ITEM_EXPLANATIONS: Record<string, string> = {
+  phone: "Smartphones are recyclable e-waste — certified facilities recover gold, silver, cobalt, and other metals. Remove and separately handle the battery, which is hazardous. Most phones end up in landfills or informal overseas recycling due to weak collection systems.",
+  battery: "Li-ion batteries are hazardous waste — their cobalt and flammable lithium electrolytes pose fire and contamination risks. Improper disposal leaches toxic metals into groundwater and soil, affecting communities near dump sites.",
+  gpu: "GPUs go to certified e-waste recyclers who recover gold, silver, and copper. AI's rapid hardware cycle means millions are discarded yearly — a systemic waste problem driven by planned obsolescence and performance competition.",
+  cable: "Cables are recyclable — the copper is valuable and recoverable. Despite this, most end up in landfills. The copper slowly leaches into soil while the plastic sheathing persists for centuries.",
+  screen: "CRT monitors are hazardous — the glass alone contains up to 4 kg of lead. Informal 'recycling' via acid stripping or open burning releases lead and cadmium into the environment, causing serious harm to workers and nearby communities in low-income countries.",
+  board: "Motherboards go to certified e-waste recyclers for gold, silver, and copper recovery. They contain lead solder and brominated flame retardants (BFRs) — formal certified recycling is critical to prevent toxic exposure.",
+};
 
 export function EWaste() {
   const [items, setItems] = useState(ITEMS);
@@ -39,7 +57,7 @@ export function EWaste() {
       index={4}
       kicker="Chapter 04 · Afterlife"
       title="The mountain we keep building."
-      description="62 million tons of e-waste leave our pockets and racks every year. Less than a quarter is formally recycled — the rest leaks heavy metals into soil and water."
+      description={<>62 million tons of <GlossaryTerm term="e-waste" definition="Electronic waste — discarded devices, components, and infrastructure. Includes GPUs, phones, cables, batteries, and server equipment. Only 22.3% is formally recycled globally." /> leave our pockets and racks every year. Less than a quarter is formally recycled — the rest leaks heavy metals into soil and water.</>}
     >
       <div className="grid gap-6 lg:grid-cols-5">
         {/* Landfill visual */}
@@ -68,7 +86,6 @@ export function EWaste() {
               );
             })}
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-deep to-transparent" />
-            {/* Toxic drips */}
             {[20, 55, 78].map((l, i) => (
               <motion.div
                 key={l}
@@ -97,6 +114,7 @@ export function EWaste() {
             <div>
               <div className="text-xs uppercase tracking-widest text-neon">mini-game</div>
               <h3 className="mt-1 text-2xl font-semibold">Sort the e-waste</h3>
+              <p className="mt-1 text-xs text-muted-foreground">Drag each item to the correct bin. Hover names to learn more.</p>
             </div>
             <div className="flex items-center gap-4">
               {isDone && (
@@ -130,7 +148,7 @@ export function EWaste() {
                     onDragStart={() => setDrag(it.id)}
                     className="cursor-grab rounded-lg border border-neon/40 bg-surface-2 px-3 py-2 text-xs font-mono active:scale-95"
                   >
-                    ⚡ {it.name}
+                    ⚡ <GlossaryTerm term={it.name} definition={ITEM_DEFS[it.id]} />
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -182,6 +200,37 @@ export function EWaste() {
               ))}
             </div>
           </div>
+
+          {isDone && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 space-y-2"
+            >
+              <div className="text-xs uppercase tracking-widest text-neon px-1">why each item belongs there</div>
+              {ITEMS.map((it) => {
+                const placedInBin = Object.entries(sorted).find(([, ids]) => ids.includes(it.id))?.[0];
+                const correct = placedInBin === it.bin;
+                const binLabel = BINS.find((b) => b.id === it.bin)?.label;
+                return (
+                  <div
+                    key={it.id}
+                    className={`rounded-xl p-3 text-xs ${correct ? "border border-neon/20 bg-neon/5" : "border border-destructive/30 bg-destructive/5"}`}
+                  >
+                    <div className="flex flex-wrap items-center gap-2 font-mono font-semibold mb-1">
+                      <span className={correct ? "text-neon" : "text-destructive-foreground"}>
+                        {correct ? "✓" : "✗"} {it.name} → {binLabel}
+                      </span>
+                      {!correct && placedInBin && (
+                        <span className="text-muted-foreground font-normal">(you chose: {BINS.find((b) => b.id === placedInBin)?.label})</span>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{ITEM_EXPLANATIONS[it.id]}</p>
+                  </div>
+                );
+              })}
+            </motion.div>
+          )}
         </div>
       </div>
 

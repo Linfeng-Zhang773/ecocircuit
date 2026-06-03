@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -6,8 +7,29 @@ interface Props {
   index: number;
   kicker: string;
   title: string;
-  description: string;
+  description: ReactNode;
   children: ReactNode;
+}
+
+export function GlossaryTerm({ term, definition }: { term: string; definition: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <span
+      className="relative inline-block"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <span className="cursor-help border-b border-dashed border-neon/60 text-neon">
+        {term}
+      </span>
+      {open && (
+        <span className="pointer-events-none absolute bottom-full left-0 z-[200] mb-2 w-64 rounded-xl border border-neon/25 bg-[oklch(0.10_0.02_165)] p-3 text-xs leading-relaxed text-foreground/90 shadow-2xl">
+          <span className="mb-1 block font-mono text-[9px] uppercase tracking-widest text-neon/70">definition</span>
+          {definition}
+        </span>
+      )}
+    </span>
+  );
 }
 
 export function SectionShell({ id, index, kicker, title, description, children }: Props) {
