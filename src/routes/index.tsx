@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/lifecycle/Hero";
 import { MaterialExtraction } from "@/components/lifecycle/MaterialExtraction";
@@ -20,21 +21,29 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [sessionKey, setSessionKey] = useState(0);
+
   const start = () => {
     document.getElementById("extraction")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const handleRestart = () => {
+    setSessionKey((k) => k + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <main className="relative min-h-screen overflow-x-hidden">
-      <ProgressNav />
+      <ProgressNav key={`nav-${sessionKey}`} />
       <Hero onStart={start} />
-      <MaterialExtraction />
-      <Manufacturing />
-      <Distribution />
-      <EWaste />
-      <Reflection />
+      <MaterialExtraction key={`ext-${sessionKey}`} />
+      <Manufacturing key={`mfg-${sessionKey}`} />
+      <Distribution key={`dist-${sessionKey}`} />
+      <EWaste key={`ew-${sessionKey}`} />
+      <Reflection key={`ref-${sessionKey}`} onRestart={handleRestart} />
       <footer className="border-t border-neon/10 py-10 text-center text-xs text-muted-foreground">
         <div className="font-mono uppercase tracking-widest">silicon footprint · interactive exhibit · v1.0</div>
-        <div className="mt-2">Figures from “The Hidden Costs of AI: Hardware Production &amp; Supply Chains” · UCSD, 2026</div>
+        <div className="mt-2">Figures from &quot;The Hidden Costs of AI: Hardware Production &amp; Supply Chains&quot; · UCSD, 2026</div>
       </footer>
     </main>
   );

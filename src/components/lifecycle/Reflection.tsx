@@ -16,8 +16,9 @@ const POLICIES = [
   { name: "Transparency Initiative (EITI)", year: "ongoing" },
 ];
 
-export function Reflection() {
+export function Reflection({ onRestart }: { onRestart?: () => void }) {
   const [picked, setPicked] = useState<string[]>([]);
+  const [showScore, setShowScore] = useState(false);
   const score = picked.reduce(
     (a, id) => a + (CHOICES.find((c) => c.id === id)?.impact ?? 0),
     0,
@@ -40,12 +41,19 @@ export function Reflection() {
                 <button
                   key={c.id}
                   onClick={() =>
+                    !showScore &&
                     setPicked((p) =>
                       p.includes(c.id) ? p.filter((x) => x !== c.id) : [...p, c.id],
                     )
                   }
                   className={`group relative overflow-hidden rounded-2xl p-6 text-left transition ${
-                    on ? "neon-border bg-neon/10 neon-glow" : "glass hover:border-neon/40"
+                    showScore
+                      ? on
+                        ? "neon-border bg-neon/10 neon-glow cursor-default"
+                        : "glass opacity-40 cursor-default"
+                      : on
+                      ? "neon-border bg-neon/10 neon-glow"
+                      : "glass hover:border-neon/40"
                   }`}
                 >
                   <div className="absolute right-4 top-4 grid h-7 w-7 place-items-center rounded-full border border-neon/40 text-xs">
@@ -63,22 +71,40 @@ export function Reflection() {
         <div className="lg:col-span-2 space-y-4">
           <div className="glass-strong rounded-3xl p-6">
             <div className="text-xs uppercase tracking-widest text-neon">your sustainability score</div>
-            <div className="mt-4 flex items-end gap-2">
-              <div className="font-mono text-6xl neon-text">{Math.min(100, score)}</div>
-              <div className="mb-2 text-muted-foreground">/ 100</div>
-            </div>
-            <div className="mt-4 h-2 overflow-hidden rounded-full bg-surface-2">
-              <motion.div
-                animate={{ width: `${Math.min(100, score)}%` }}
-                className="h-full bg-gradient-to-r from-neon to-toxic"
-              />
-            </div>
-            <div className="mt-3 text-xs text-muted-foreground">
-              {score === 0 && "Pick at least one future."}
-              {score > 0 && score < 50 && "A start — every percent counts."}
-              {score >= 50 && score < 80 && "Solid combined approach."}
-              {score >= 80 && "Circular future unlocked. Share it."}
-            </div>
+            {showScore ? (
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="mt-4 flex items-end gap-2">
+                  <div className="font-mono text-6xl neon-text">{Math.min(100, score)}</div>
+                  <div className="mb-2 text-muted-foreground">/ 100</div>
+                </div>
+                <div className="mt-4 h-2 overflow-hidden rounded-full bg-surface-2">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${Math.min(100, score)}%` }}
+                    className="h-full bg-gradient-to-r from-neon to-toxic"
+                  />
+                </div>
+                <div className="mt-3 text-xs text-muted-foreground">
+                  {score === 0 && "Pick at least one future."}
+                  {score > 0 && score < 50 && "A start — every percent counts."}
+                  {score >= 50 && score < 80 && "Solid combined approach."}
+                  {score >= 80 && "Circular future unlocked. Share it."}
+                </div>
+              </motion.div>
+            ) : (
+              <div className="mt-4">
+                <div className="text-sm text-muted-foreground mb-4">
+                  {picked.length === 0 ? "Select at least one future to see your score." : `${picked.length} future${picked.length > 1 ? "s" : ""} selected — ready to calculate.`}
+                </div>
+                <button
+                  onClick={() => setShowScore(true)}
+                  disabled={picked.length === 0}
+                  className="w-full rounded-xl bg-neon/20 border border-neon/40 px-4 py-3 text-sm font-semibold text-neon transition hover:bg-neon/30 disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  Calculate Score
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="glass rounded-3xl p-6">
@@ -112,7 +138,10 @@ export function Reflection() {
             <button className="rounded-full bg-neon px-6 py-3 text-sm font-semibold text-primary-foreground neon-glow">
               Share the exhibit
             </button>
-            <button className="rounded-full border border-neon/40 px-6 py-3 text-sm hover:bg-neon/10">
+            <button
+              onClick={onRestart}
+              className="rounded-full border border-neon/40 px-6 py-3 text-sm hover:bg-neon/10"
+            >
               Restart journey
             </button>
           </div>

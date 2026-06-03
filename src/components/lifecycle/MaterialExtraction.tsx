@@ -23,6 +23,11 @@ export function MaterialExtraction() {
   const [matches, setMatches] = useState<Record<string, string>>({});
   const [draggedFrom, setDraggedFrom] = useState<string | null>(null);
 
+  const isDone = Object.keys(matches).length === MATERIALS.length;
+  const correctCount = isDone
+    ? Object.entries(matches).filter(([id, part]) => MATERIALS.find((m) => m.id === id)?.part === part).length
+    : 0;
+
   return (
     <SectionShell
       id="extraction"
@@ -132,39 +137,73 @@ export function MaterialExtraction() {
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <div className="space-y-3">
-            {MATERIALS.map((m) => (
-              <div
-                key={m.id}
-                draggable
-                onDragStart={() => setDraggedFrom(m.id)}
-                className={`cursor-grab rounded-xl border border-neon/30 bg-surface-2 px-4 py-3 text-sm font-mono transition active:scale-95 ${
-                  matches[m.id] ? "opacity-30" : ""
-                }`}
-              >
-                ⛏ {m.name}
-              </div>
-            ))}
+            {MATERIALS.map((m) => {
+              const wasMatched = !!matches[m.id];
+              const isCorrect = matches[m.id] === m.part;
+              return (
+                <div
+                  key={m.id}
+                  draggable={!isDone}
+                  onDragStart={() => setDraggedFrom(m.id)}
+                  className={`cursor-grab rounded-xl border px-4 py-3 text-sm font-mono transition active:scale-95 ${
+                    isDone && wasMatched
+                      ? isCorrect
+                        ? "border-neon bg-neon/10 text-neon opacity-60"
+                        : "border-destructive bg-destructive/20 text-destructive-foreground opacity-60"
+                      : wasMatched
+                      ? "border-neon/30 bg-surface-2 opacity-30"
+                      : "border-neon/30 bg-surface-2"
+                  }`}
+                >
+                  ⛏ {m.name}
+                </div>
+              );
+            })}
           </div>
           <div className="space-y-3">
-            {MATERIALS.map((m) => (
-              <div
-                key={m.id}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={() => {
-                  if (draggedFrom)
-                    setMatches((p) => ({ ...p, [draggedFrom]: m.part }));
-                }}
-                className={`rounded-xl border border-dashed px-4 py-3 text-sm transition ${
-                  Object.values(matches).includes(m.part)
-                    ? "border-neon bg-neon/10 text-neon"
-                    : "border-neon/30 text-muted-foreground"
-                }`}
-              >
-                ▢ {m.part}
-              </div>
-            ))}
+            {MATERIALS.map((m) => {
+              const droppedId = Object.entries(matches).find(([, part]) => part === m.part)?.[0];
+              const hasMatch = !!droppedId;
+              const isCorrect = hasMatch && MATERIALS.find((mat) => mat.id === droppedId)?.part === m.part;
+              return (
+                <div
+                  key={m.id}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => {
+                    if (draggedFrom && !isDone)
+                      setMatches((p) => ({ ...p, [draggedFrom]: m.part }));
+                  }}
+                  className={`rounded-xl border border-dashed px-4 py-3 text-sm transition ${
+                    isDone && hasMatch
+                      ? isCorrect
+                        ? "border-neon bg-neon/10 text-neon"
+                        : "border-destructive bg-destructive/20 text-destructive-foreground"
+                      : hasMatch
+                      ? "border-neon bg-neon/10 text-neon"
+                      : "border-neon/30 text-muted-foreground"
+                  }`}
+                >
+                  ▢ {m.part}
+                </div>
+              );
+            })}
           </div>
         </div>
+        {isDone && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-6 flex items-center gap-4 rounded-2xl bg-deep/60 px-6 py-4"
+          >
+            <div className="font-mono text-4xl neon-text">{correctCount}/{MATERIALS.length}</div>
+            <div>
+              <div className="text-sm font-semibold">correct matches</div>
+              <div className="text-xs text-muted-foreground">
+                {correctCount === MATERIALS.length ? "Perfect score! All materials matched correctly." : `${MATERIALS.length - correctCount} incorrect — try resetting to improve.`}
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </SectionShell>
   );

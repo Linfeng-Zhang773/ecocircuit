@@ -21,9 +21,17 @@ export function EWaste() {
   const [sorted, setSorted] = useState<Record<string, string[]>>({ recycle: [], hazard: [] });
   const [drag, setDrag] = useState<string | null>(null);
 
+  const isDone = items.length === 0;
+
   const correct = Object.entries(sorted).reduce((acc, [bin, ids]) => {
     return acc + ids.filter((id) => ITEMS.find((i) => i.id === id)?.bin === bin).length;
   }, 0);
+
+  const handleReset = () => {
+    setItems(ITEMS);
+    setSorted({ recycle: [], hazard: [] });
+    setDrag(null);
+  };
 
   return (
     <SectionShell
@@ -90,9 +98,23 @@ export function EWaste() {
               <div className="text-xs uppercase tracking-widest text-neon">mini-game</div>
               <h3 className="mt-1 text-2xl font-semibold">Sort the e-waste</h3>
             </div>
-            <div className="text-right text-xs text-muted-foreground">
-              correct
-              <div className="text-2xl font-mono neon-text">{correct}/{ITEMS.length}</div>
+            <div className="flex items-center gap-4">
+              {isDone && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-right text-xs text-muted-foreground"
+                >
+                  correct
+                  <div className="text-2xl font-mono neon-text">{correct}/{ITEMS.length}</div>
+                </motion.div>
+              )}
+              <button
+                onClick={handleReset}
+                className="text-xs text-muted-foreground hover:text-neon"
+              >
+                reset
+              </button>
             </div>
           </div>
 
@@ -144,10 +166,14 @@ export function EWaste() {
                         <span
                           key={id}
                           className={`rounded px-2 py-1 text-[10px] font-mono ${
-                            right ? "bg-neon/20 text-neon" : "bg-destructive/30 text-destructive-foreground"
+                            isDone
+                              ? right
+                                ? "bg-neon/20 text-neon"
+                                : "bg-destructive/30 text-destructive-foreground"
+                              : "bg-surface-2 text-muted-foreground"
                           }`}
                         >
-                          {it?.name} {right ? "✓" : "✗"}
+                          {it?.name} {isDone ? (right ? "✓" : "✗") : ""}
                         </span>
                       );
                     })}
