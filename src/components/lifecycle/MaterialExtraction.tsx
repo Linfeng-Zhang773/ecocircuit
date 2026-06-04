@@ -26,17 +26,17 @@ const MATERIAL_DEFS: Record<string, string> = {
 };
 
 const PART_DEFS: Record<string, string> = {
-  Batteries: "Rechargeable energy storage in devices and data center backup power. Modern lithium-ion batteries require cobalt, lithium, nickel, and manganese — all mined primarily in the Global South.",
+  Batteries: "Rechargeable energy storage in devices and data center backup power. Modern lithium-ion batteries require cobalt, lithium, nickel, and manganese, all mined primarily in the Global South.",
   "Power cells": "Individual electrochemical units within a battery pack. Lithium-ion cells offer the best energy-to-weight ratio available, making lithium one of the most contested minerals in supply chains.",
   Wafer: "A thin, circular slice of ultra-pure silicon crystal (~1mm thick) on which hundreds of chips are etched using photolithography. One 300mm wafer can yield 400+ chips.",
   Interconnects: "Microscopic copper wires linking billions of transistors on a chip. Copper replaced aluminum in the late 1990s due to its lower electrical resistance and better performance at nanometer scales.",
 };
 
 const MATERIAL_EXPLANATIONS: Record<string, string> = {
-  co: "Cobalt stabilizes lithium-ion battery cathodes, preventing overheating. The DRC produces 70% of global cobalt — extraction is linked to child labor and severe water contamination in communities near mines.",
-  li: "Lithium's electrochemical properties make it ideal for rechargeable cells. Chile and Argentina hold ~60% of known reserves in salt flat brines — extraction consumes millions of liters of water in one of Earth's driest regions.",
+  co: "Cobalt stabilizes lithium-ion battery cathodes, preventing overheating. The DRC produces 70% of global cobalt, and extraction is linked to child labor and severe water contamination in communities near mines.",
+  li: "Lithium's electrochemical properties make it ideal for rechargeable cells. Chile and Argentina hold ~60% of known reserves in salt flat brines, where extraction consumes millions of liters of water in one of Earth's driest regions.",
   si: "Pure silicon wafers are the foundation of every chip. Refining silica causes measurable land degradation and workers in silica mines face silicosis rates of 10–20% and tuberculosis co-infection rates up to 40%.",
-  cu: "Copper replaced aluminum for chip interconnects due to lower resistance. Global chip and server production drives massive copper demand — the African Copperbelt often operates with weak environmental oversight.",
+  cu: "Copper replaced aluminum for chip interconnects due to lower resistance. Global chip and server production drives massive copper demand, and the African Copperbelt often operates with weak environmental oversight.",
 };
 
 export function MaterialExtraction() {
@@ -139,31 +139,31 @@ export function MaterialExtraction() {
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         <InfoBlock title="Geographic Concentration & the Supply Chain Divide" citations={[1, 6]}>
-          <p>The <GlossaryTerm term="DRC" definition="Democratic Republic of Congo — holds ~50% of the world's cobalt reserves and produces 70% of mined cobalt. Despite this resource wealth, the DRC remains one of the world's poorest countries." /> holds half of the world's cobalt reserves and produces 70% of mined cobalt. China refines roughly 70% of global rare earth production and holds ~40% of reserves. These countries bear the full environmental and health costs of extraction while multinational corporations headquartered in the US, EU, and Japan capture most of the economic value. One study of African mining terms this <em>"extractive imperialism"</em> — foreign capital externalizes environmental costs onto African landscapes and communities who are made to subsidize the wealth of transnational businesses.</p>
-          <p>A chip's components cross international borders approximately 70 times and travel over 50,000 km before reaching a data center. Ore mined in Africa is shipped to China for refining, then sold as battery chemicals to tech firms across the West — a supply chain divide that mirrors centuries of colonial resource extraction. The DRC, despite its mineral wealth, remains poverty-stricken.</p>
+          <p>The <GlossaryTerm term="DRC" definition="Democratic Republic of Congo, which holds ~50% of the world's cobalt reserves and produces 70% of mined cobalt. Despite this resource wealth, the DRC remains one of the world's poorest countries." /> holds half of the world's cobalt reserves and produces 70% of mined cobalt. China refines roughly 70% of global rare earth production and holds ~40% of reserves. These countries bear the full environmental and health costs of extraction while multinational corporations headquartered in the US, EU, and Japan capture most of the economic value. One study of African mining terms this <em>"extractive imperialism"</em>: foreign capital externalizes environmental costs onto African landscapes and communities who are made to subsidize the wealth of transnational businesses.</p>
+          <p>A chip's components cross international borders approximately 70 times and travel over 50,000 km before reaching a data center. Ore mined in Africa is shipped to China for refining, then sold as battery chemicals to tech firms across the West. This supply chain divide mirrors centuries of colonial resource extraction. The DRC, despite its mineral wealth, remains poverty-stricken.</p>
         </InfoBlock>
 
         <InfoBlock title="Tailings, Disasters & Deforestation" citations={[5, 6]}>
-          <p>Mining produces more than <strong>14 billion metric tons of tailings per year</strong> — fine residues containing cyanide compounds, flotation chemicals, and heavy metals. In 2019, Brazil's Brumadinho iron ore tailings dam collapsed, killing 270 people and contaminating rivers across a wide region. In 2014, Canada's Mount Polley copper mine released 25 million cubic metres of tailings into nearby lakes and rivers, altering riverbeds and displacing communities.</p>
-          <p>Indonesia, Brazil, Ghana, and Suriname account for <strong>80% of deforestation caused by industrial mining demand</strong>. In Brazil, illegal mines intentionally burn forest on Indigenous lands for access — producing pollution at two to four times above WHO recommendations, affecting tens of millions of people in the Amazon region. Indigenous communities face disproportionate health impacts due to pre-existing conditions and reduced healthcare access, worsening existing inequalities.</p>
+          <p>Mining produces more than <strong>14 billion metric tons of tailings per year</strong>: fine residues containing cyanide compounds, flotation chemicals, and heavy metals. In 2019, Brazil's Brumadinho iron ore tailings dam collapsed, killing 270 people and contaminating rivers across a wide region. In 2014, Canada's Mount Polley copper mine released 25 million cubic metres of tailings into nearby lakes and rivers, altering riverbeds and displacing communities.</p>
+          <p>Indonesia, Brazil, Ghana, and Suriname account for <strong>80% of deforestation caused by industrial mining demand</strong>. In Brazil, illegal mines intentionally burn forest on Indigenous lands for access, producing pollution at two to four times above WHO recommendations and affecting tens of millions of people in the Amazon region. Indigenous communities face disproportionate health impacts due to pre-existing conditions and reduced healthcare access, worsening existing inequalities.</p>
         </InfoBlock>
       </div>
 
       <div className="mt-6">
         <InfoBlock title="Silica Mining, Worker Health & the Coming Mineral Crunch" citations={[6, 9, 10]}>
-          <p>Silicon is the backbone of all AI chips — but refining silica into semiconductor-grade material comes at a serious environmental cost. In silica mining zones, soil organic carbon decreases by <strong>50–70%</strong> and vegetation cover drops ~65% compared to control sites. Washing and classifying silica ore requires 4,500–6,000 gallons of water per minute (6.5–8.6 million litres per day). Long-term workers face silicosis rates of <strong>10–20%</strong> and tuberculosis co-infection rates up to 40%. In India's Shankargarh region, 57 officially leased mines covering 206 acres were accompanied by illegal operations spanning more than 2,000 acres — producing barren wastelands and contaminated water.</p>
-          <p>The mineral demand driven by AI is accelerating fast. By 2030, AI data centers are projected to account for approximately <strong>2% of global copper and silicon demand</strong>, over 3% for rare earth elements, and a significant <strong>11% of global gallium demand</strong>. This surge is shifting supply chain pressure from electric vehicles to AI infrastructure — with policymakers warning of potential shortages and intensified competition for resources that are already extracted under inequitable and environmentally destructive conditions.</p>
+          <p>Silicon is the backbone of all AI chips, but refining silica into semiconductor-grade material comes at a serious environmental cost. In silica mining zones, soil organic carbon decreases by <strong>50–70%</strong> and vegetation cover drops ~65% compared to control sites. Washing and classifying silica ore requires 4,500–6,000 gallons of water per minute (6.5–8.6 million litres per day). Long-term workers face silicosis rates of <strong>10–20%</strong> and tuberculosis co-infection rates up to 40%. In India's Shankargarh region, 57 officially leased mines covering 206 acres were accompanied by illegal operations spanning more than 2,000 acres, producing barren wastelands and contaminated water.</p>
+          <p>The mineral demand driven by AI is accelerating fast. By 2030, AI data centers are projected to account for approximately <strong>2% of global copper and silicon demand</strong>, over 3% for rare earth elements, and a significant <strong>11% of global gallium demand</strong>. This surge is shifting supply chain pressure from electric vehicles to AI infrastructure, with policymakers warning of potential shortages and intensified competition for resources that are already extracted under inequitable and environmentally destructive conditions.</p>
         </InfoBlock>
       </div>
 
       {/* Mini match game */}
       <div className="mt-10 glass rounded-3xl p-6">
         <div className="flex items-center justify-between">
-          <div>
-            <div className="text-xs uppercase tracking-widest text-neon">mini-game</div>
-            <h3 className="mt-1 text-2xl font-semibold">Match raw materials → chip parts</h3>
-            <p className="mt-1 text-xs text-muted-foreground">Drag each material to its correct chip component. Hover the names to learn more.</p>
-          </div>
+            <div>
+              <div className="text-xs uppercase tracking-widest text-neon">mini-game</div>
+            <h3 className="mt-1 text-2xl font-semibold">Match raw materials to hardware systems</h3>
+              <p className="mt-1 text-xs text-muted-foreground">Drag each material to its correct hardware system. Hover the names to learn more.</p>
+            </div>
           <button
             onClick={() => setMatches({})}
             className="text-xs text-muted-foreground hover:text-neon"
@@ -191,7 +191,7 @@ export function MaterialExtraction() {
                       : "border-neon/30 bg-surface-2 cursor-grab"
                   }`}
                 >
-                  ⛏ <GlossaryTerm term={m.name} definition={MATERIAL_DEFS[m.id]} />
+                  <GlossaryTerm term={m.name} definition={MATERIAL_DEFS[m.id]} />
                 </div>
               );
             })}
@@ -237,7 +237,7 @@ export function MaterialExtraction() {
               <div>
                 <div className="text-sm font-semibold">correct matches</div>
                 <div className="text-xs text-muted-foreground">
-                  {correctCount === MATERIALS.length ? "Perfect! All materials matched correctly." : `${MATERIALS.length - correctCount} incorrect — see explanations below.`}
+                  {correctCount === MATERIALS.length ? "Perfect! All materials matched correctly." : `${MATERIALS.length - correctCount} incorrect. See explanations below.`}
                 </div>
               </div>
             </div>
@@ -251,7 +251,7 @@ export function MaterialExtraction() {
                 >
                   <div className="flex flex-wrap items-center gap-2 font-mono font-semibold mb-1">
                     <span className={correct ? "text-neon" : "text-destructive-foreground"}>
-                      {correct ? "✓" : "✗"} {m.name} → {m.part}
+                      {correct ? "Correct:" : "Review:"} {m.name} to {m.part}
                     </span>
                     {!correct && matches[m.id] && (
                       <span className="text-muted-foreground font-normal">(you chose: {matches[m.id]})</span>

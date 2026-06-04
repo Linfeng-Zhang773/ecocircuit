@@ -13,9 +13,9 @@ import { ProgressNav } from "@/components/lifecycle/ProgressNav";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Silicon Footprint — The hidden cost of AI hardware" },
-      { name: "description", content: "An interactive exhibit on the environmental life cycle of AI hardware — from raw earth to e-waste." },
-      { property: "og:title", content: "Silicon Footprint — The hidden cost of AI hardware" },
+      { title: "Silicon Footprint: The hidden cost of AI hardware" },
+      { name: "description", content: "An interactive exhibit on the environmental life cycle of AI hardware, from raw earth to e-waste." },
+      { property: "og:title", content: "Silicon Footprint: The hidden cost of AI hardware" },
       { property: "og:description", content: "Explore extraction, fabrication, distribution and e-waste behind the chips powering AI." },
     ],
   }),

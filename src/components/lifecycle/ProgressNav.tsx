@@ -92,7 +92,7 @@ export function ProgressNav() {
         whileTap={{ cursor: "grabbing" }}
       >
         <div className="glass-strong rounded-2xl select-none overflow-hidden">
-          {/* Header row — always visible, drag target */}
+          {/* Header row, always visible, drag target */}
           <div className="flex items-center justify-between gap-3 px-4 py-3">
             <div className="flex items-center gap-2">
               {/* Drag handle */}
@@ -147,7 +147,7 @@ export function ProgressNav() {
                               : "border-muted-foreground/40 text-muted-foreground"
                           }`}
                         >
-                          {done && !on ? "✓" : i + 1}
+                          {i + 1}
                         </span>
                         <span
                           className={`text-[11px] opacity-0 transition group-hover:opacity-100 ${
@@ -164,7 +164,7 @@ export function ProgressNav() {
 
               {pct === 100 && (
                 <div className="mt-4 rounded-lg bg-neon/15 px-2 py-1 text-center text-[9px] uppercase tracking-widest text-neon">
-                  ★ complete
+                  complete
                 </div>
               )}
             </div>

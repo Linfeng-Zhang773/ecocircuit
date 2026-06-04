@@ -68,7 +68,6 @@ export function Hero({ onStart }: { onStart: () => void }) {
             className="group relative inline-flex items-center gap-3 rounded-full bg-neon px-7 py-3.5 text-sm font-semibold text-primary-foreground transition hover:scale-[1.03] neon-glow"
           >
             Start the Journey
-            <span className="transition group-hover:translate-x-1">→</span>
           </button>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span className="h-px w-8 bg-neon/40" />

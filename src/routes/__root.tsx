@@ -73,14 +73,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Syn100 Team 5" },
-      { name: "description", content: "EcoCircuit is an interactive website that explores the hidden environmental cost of AI hardware — from raw material mining and chip manufacturing to global supply chains and e-waste." },
+      { name: "description", content: "EcoCircuit is an interactive website that explores the hidden environmental cost of AI hardware, from raw material mining and chip manufacturing to global supply chains and e-waste." },
       { name: "author", content: "EcoCircuit Team" },
       { property: "og:title", content: "Eco Circuit" },
-      { property: "og:description", content: "EcoCircuit is an interactive website that explores the hidden environmental cost of AI hardware — from raw material mining and chip manufacturing to global supply chains and e-waste." },
+      { property: "og:description", content: "EcoCircuit is an interactive website that explores the hidden environmental cost of AI hardware, from raw material mining and chip manufacturing to global supply chains and e-waste." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Eco Circuit" },
-      { name: "twitter:description", content: "EcoCircuit is an interactive website that explores the hidden environmental cost of AI hardware — from raw material mining and chip manufacturing to global supply chains and e-waste." },
+      { name: "twitter:description", content: "EcoCircuit is an interactive website that explores the hidden environmental cost of AI hardware, from raw material mining and chip manufacturing to global supply chains and e-waste." },
     ],
     links: [
       {

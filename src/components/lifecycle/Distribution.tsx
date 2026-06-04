@@ -19,10 +19,10 @@ const DATA = [
 ];
 
 const ROUTES = [
-  { from: [53, 58], to: [76, 42], label: "DR Congo → China" },
-  { from: [76, 42], to: [22, 38], label: "China → US" },
-  { from: [76, 42], to: [42, 26], label: "China → EU / Japan" },
-  { from: [76, 42], to: [80, 64], label: "Taiwan → Asia hubs" },
+  { from: [53, 58], to: [76, 42], label: "DR Congo to China" },
+  { from: [76, 42], to: [22, 38], label: "China to US" },
+  { from: [76, 42], to: [42, 26], label: "China to EU / Japan" },
+  { from: [76, 42], to: [80, 64], label: "Taiwan to Asia hubs" },
 ];
 
 export function Distribution() {
@@ -35,7 +35,7 @@ export function Distribution() {
       index={3}
       kicker="Section 03 · Distribution"
       title="The Global Supply Chain"
-      description="A single chip's components travel more than 50,000 km and cross borders roughly 70 times — ore mined in Africa, refined in Asia, sold to firms in the US, EU, and Japan."
+      description="A single chip's components travel more than 50,000 km and cross borders roughly 70 times: ore mined in Africa, refined in Asia, sold to firms in the US, EU, and Japan."
     >
       <div className="grid gap-6 lg:grid-cols-5">
         <div className="lg:col-span-3 glass rounded-3xl p-6 relative overflow-hidden">
@@ -71,7 +71,7 @@ export function Distribution() {
             <div className="absolute bottom-4 right-4 glass-strong rounded-xl p-3 text-[10px] uppercase tracking-widest">
               <div className="text-neon mb-1">corridors</div>
               {ROUTES.map((r) => (
-                <div key={r.label} className="text-muted-foreground">· {r.label}</div>
+                <div key={r.label} className="text-muted-foreground">{r.label}</div>
               ))}
             </div>
           </div>
@@ -126,13 +126,13 @@ export function Distribution() {
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         <InfoBlock title="Who Profits, Who Pays" citations={[1, 6, 9]}>
-          <p>The raw material flow of AI hardware embodies a structural divide: extraction occurs in the <GlossaryTerm term="Global South" definition="A term for lower-income nations in Africa, Latin America, and Asia that bear disproportionate environmental and labor costs of electronics production while receiving minimal economic benefit." />, while high-value refining, manufacturing, and profits concentrate in advanced economies. Nearly all Congolese cobalt is shipped to China for processing — and Chinese firms supply most of the world's refined cobalt and gallium to US and European tech companies. The DRC, despite holding half the world's cobalt reserves, remains one of the world's poorest countries.</p>
-          <p>This pattern reflects what researchers call <GlossaryTerm term="extractive capitalism" definition="An economic system in which profits are maximized for investors in wealthy countries while workers, ecosystems, and communities in resource-rich but politically weak countries bear the environmental and health costs." />: profits for investors in rich countries, costs externalized onto workers and ecosystems in poor ones. A single chip's components travel over 50,000 km and cross approximately 70 international borders — yet the communities bearing the environmental cost of each border crossing rarely share in the economic gain.</p>
+          <p>The raw material flow of AI hardware embodies a structural divide: extraction occurs in the <GlossaryTerm term="Global South" definition="A term for lower-income nations in Africa, Latin America, and Asia that bear disproportionate environmental and labor costs of electronics production while receiving minimal economic benefit." />, while high-value refining, manufacturing, and profits concentrate in advanced economies. Nearly all Congolese cobalt is shipped to China for processing, and Chinese firms supply most of the world's refined cobalt and gallium to US and European tech companies. The DRC, despite holding half the world's cobalt reserves, remains one of the world's poorest countries.</p>
+          <p>This pattern reflects what researchers call <GlossaryTerm term="extractive capitalism" definition="An economic system in which profits are maximized for investors in wealthy countries while workers, ecosystems, and communities in resource-rich but politically weak countries bear the environmental and health costs." />: profits for investors in rich countries, costs externalized onto workers and ecosystems in poor ones. A single chip's components travel over 50,000 km and cross approximately 70 international borders, yet the communities bearing the environmental cost of each border crossing rarely share in the economic gain.</p>
         </InfoBlock>
 
         <InfoBlock title="Data Centers & the Water Crisis" citations={[1, 6]}>
-          <p>By 2030, AI data centers are projected to drive approximately <strong>2% of global copper and silicon demand</strong>, over <strong>3% for rare earth elements</strong>, and a significant <strong>11% for gallium</strong> — accelerating pressure on supply chains already under severe environmental strain. Global data centers consumed roughly <strong>800 billion litres of water in 2023</strong>, with ~140 billion litres used onsite for cooling — stressing watersheds in already water-scarce regions like Texas, Arizona, and California.</p>
-          <p>A modern semiconductor fab consumes roughly <strong>38 million litres of ultra-pure water per day</strong>. This is in addition to the water consumed during mining (silica ore processing alone requires 4,500–6,000 gallons per minute). The full lifecycle water footprint of AI hardware — from mine to data center — spans continents and falls disproportionately on communities in regions already facing climate-driven water scarcity.</p>
+          <p>By 2030, AI data centers are projected to drive approximately <strong>2% of global copper and silicon demand</strong>, over <strong>3% for rare earth elements</strong>, and a significant <strong>11% for gallium</strong>, accelerating pressure on supply chains already under severe environmental strain. Global data centers consumed roughly <strong>800 billion litres of water in 2023</strong>, with ~140 billion litres used onsite for cooling, stressing watersheds in already water-scarce regions like Texas, Arizona, and California.</p>
+          <p>A modern semiconductor fab consumes roughly <strong>38 million litres of ultra-pure water per day</strong>. This is in addition to the water consumed during mining (silica ore processing alone requires 4,500–6,000 gallons per minute). The full lifecycle water footprint of AI hardware, from mine to data center, spans continents and falls disproportionately on communities in regions already facing climate-driven water scarcity.</p>
         </InfoBlock>
       </div>
 
@@ -140,7 +140,7 @@ export function Distribution() {
         <StatCard value="50,000 km" label="One chip's journey" hint="before final use" />
         <StatCard value="~70" label="Border crossings / chip" hint="globalized supply chain" />
         <StatCard value="800B L" label="Data-center water, 2023" hint="~140B L onsite cooling" />
-        <StatCard value="≈100%" label="Congolese cobalt → China" hint="for refining" />
+        <StatCard value="nearly all" label="Congolese cobalt to China" hint="for refining" />
       </div>
     </SectionShell>
   );

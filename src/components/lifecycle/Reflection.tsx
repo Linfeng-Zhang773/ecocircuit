@@ -6,11 +6,11 @@ const CHOICES = [
   {
     id: "cf",
     title: "90% carbon-free fabs",
-    tag: "≈20× potential cut",
+    tag: "about 20x potential cut",
     impact: 40,
     label: "Clean grids + hardware + software gains could cut carbon per AI workload ~20×",
     tagTerms: [] as { term: string; def: string }[],
-    explanation: "Taiwan's grid is only ~6% renewable energy while its fabs produce 63% of global IC output. Moving to 90% carbon-free energy — combined with hardware and software efficiency gains — could achieve a ~20x reduction in carbon per AI workload, per Google's TPU lifecycle analysis.",
+    explanation: "Taiwan's grid is only ~6% renewable energy while its fabs produce 63% of global IC output. Moving to 90% carbon-free energy, combined with hardware and software efficiency gains, could achieve a ~20x reduction in carbon per AI workload, per Google's TPU lifecycle analysis.",
   },
   {
     id: "soft",
@@ -18,8 +18,8 @@ const CHOICES = [
     tag: "3× CCI gain",
     impact: 25,
     label: "Compute-carbon-intensity improved 3× from TPU v4i to v6e",
-    tagTerms: [{ term: "CCI", def: "Compute Carbon Intensity — grams of CO₂ equivalent emitted per ExaFLOP of computation. Lower is better. Improved 3x from TPU v4i (2020) to v6e (2024)." }],
-    explanation: "Compute Carbon Intensity (CCI) measures gCO₂e per ExaFLOP. It improved 3x from TPU v4i to v6e in just 4 years, showing efficiency gains can partially decouple AI growth from emissions. Memory accounts for ~38% of manufacturing emissions — smaller, more efficient models directly reduce this.",
+    tagTerms: [{ term: "CCI", def: "Compute Carbon Intensity: grams of CO₂ equivalent emitted per ExaFLOP of computation. Lower is better. Improved 3x from TPU v4i (2020) to v6e (2024)." }],
+    explanation: "Compute Carbon Intensity (CCI) measures gCO₂e per ExaFLOP. It improved 3x from TPU v4i to v6e in just 4 years, showing efficiency gains can partially decouple AI growth from emissions. Memory accounts for ~38% of manufacturing emissions, so smaller, more efficient models directly reduce this.",
   },
   {
     id: "water",
@@ -27,8 +27,8 @@ const CHOICES = [
     tag: "97% PFAS removed",
     impact: 20,
     label: "90% water recovery at pilot scale",
-    tagTerms: [{ term: "PFAS", def: "Per- and polyfluoroalkyl substances — 'forever chemicals' used in chip etching processes. They persist in water and soil for centuries and are linked to cancer, immune disruption, and developmental harm." }],
-    explanation: "Taiwan's fabs consume ~10% of local daily reservoir water. TSMC's water use grew 108% from 2015–2020. Nanofiltration membranes remove >97% of PFAS (toxic 'forever chemicals') from fab wastewater and recover 90% of water for reuse — critical for Taiwan's drought-stressed regions.",
+    tagTerms: [{ term: "PFAS", def: "Per- and polyfluoroalkyl substances: 'forever chemicals' used in chip etching processes. They persist in water and soil for centuries and are linked to cancer, immune disruption, and developmental harm." }],
+    explanation: "Taiwan's fabs consume ~10% of local daily reservoir water. TSMC's water use grew 108% from 2015–2020. Nanofiltration membranes remove >97% of PFAS (toxic 'forever chemicals') from fab wastewater and recover 90% of water for reuse, critical for Taiwan's drought-stressed regions.",
   },
   {
     id: "epr",
@@ -36,7 +36,7 @@ const CHOICES = [
     tag: "binding e-waste rules",
     impact: 15,
     label: "Hold makers responsible; halt exports to weak-regulation states",
-    tagTerms: [{ term: "EPR", def: "Extended Producer Responsibility — a policy framework that holds manufacturers financially liable for the end-of-life disposal of their products, preventing companies from externalizing costs onto society or poorer nations." }],
+    tagTerms: [{ term: "EPR", def: "Extended Producer Responsibility: a policy framework that holds manufacturers financially liable for the end-of-life disposal of their products, preventing companies from externalizing costs onto society or poorer nations." }],
     explanation: "Only 22.3% of e-waste is formally recycled. Rich nations often export 'recycled' electronics to Ghana, Nigeria, and India where workers acid-strip and burn components in unsafe conditions. EPR laws force manufacturers to fund and be accountable for end-of-life hardware recovery.",
   },
 ];
@@ -62,7 +62,7 @@ export function Reflection({ onRestart }: { onRestart?: () => void }) {
       index={5}
       kicker="Section 05 · Solutions"
       title="What Can We Actually Do?"
-      description="AI is here. The question is whether the next decade of compute is extractive — or circular. Pick the futures you'd back."
+      description="AI is here. The question is whether the next decade of compute is extractive or circular. Pick the futures you'd back."
     >
       <div className="grid gap-6 lg:grid-cols-5">
         <div className="lg:col-span-3">
@@ -89,7 +89,7 @@ export function Reflection({ onRestart }: { onRestart?: () => void }) {
                   }`}
                 >
                   <div className="absolute right-4 top-4 grid h-7 w-7 place-items-center rounded-full border border-neon/40 text-xs">
-                    {on ? "✓" : "+"}
+                    {on ? "on" : "+"}
                   </div>
                   <div className="text-xs uppercase tracking-widest text-neon flex flex-wrap items-center gap-1">
                     {c.tagTerms.length > 0 ? (
@@ -133,7 +133,7 @@ export function Reflection({ onRestart }: { onRestart?: () => void }) {
                 </div>
                 <div className="mt-3 text-xs text-muted-foreground">
                   {score === 0 && "Pick at least one future."}
-                  {score > 0 && score < 50 && "A start — every percent counts."}
+                  {score > 0 && score < 50 && "A start. Every percent counts."}
                   {score >= 50 && score < 80 && "Solid combined approach."}
                   {score >= 80 && "Circular future unlocked. Share it."}
                 </div>
@@ -147,7 +147,7 @@ export function Reflection({ onRestart }: { onRestart?: () => void }) {
                         className={`rounded-xl p-3 text-xs ${selected ? "border border-neon/20 bg-neon/5" : "border border-white/5 bg-surface-2/30 opacity-60"}`}
                       >
                         <div className={`font-mono font-semibold mb-1 ${selected ? "text-neon" : "text-muted-foreground"}`}>
-                          {selected ? "✓" : "○"} {c.title}
+                          {selected ? "Selected:" : "Not selected:"} {c.title}
                         </div>
                         <p className="text-muted-foreground leading-relaxed">{c.explanation}</p>
                       </div>
@@ -160,7 +160,7 @@ export function Reflection({ onRestart }: { onRestart?: () => void }) {
                 <div className="text-sm text-muted-foreground mb-4">
                   {picked.length === 0
                     ? "Select at least one future to see your score."
-                    : `${picked.length} future${picked.length > 1 ? "s" : ""} selected — ready to calculate.`}
+                    : `${picked.length} future${picked.length > 1 ? "s" : ""} selected. Ready to calculate.`}
                 </div>
                 <button
                   onClick={() => setShowScore(true)}
