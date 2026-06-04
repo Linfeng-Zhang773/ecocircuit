@@ -41,22 +41,13 @@ export function Hero({ onStart }: { onStart: () => void }) {
       </div>
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 md:mr-auto md:ml-[8%] md:px-0">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-neon"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-neon animate-pulse" />
-          Interactive exhibit · v1.0
-        </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mt-6 text-5xl font-semibold leading-[1.05] md:text-7xl"
         >
-          AI Isn't Just <span className="text-gradient-neon">Digital.</span>
+          The Hidden <span className="text-gradient-neon">Costs of AI.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -64,8 +55,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl"
         >
-          Explore the hidden environmental cost behind every chip, server, and
-          model — from raw earth to e-waste.
+          A deepdive on hardware production and supply chains.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,7 +72,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
           </button>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span className="h-px w-8 bg-neon/40" />
-            5 chapters · ~4 min read · interactive
+            5 sections · ~4 min read · interactive
           </div>
         </motion.div>
 

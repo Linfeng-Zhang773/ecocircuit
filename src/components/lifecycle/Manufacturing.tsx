@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { SectionShell, StatCard } from "./SectionShell";
+import { SectionShell, StatCard, GlossaryTerm, InfoBlock } from "./SectionShell";
 
 const STEPS = [
   { id: "wafer", name: "Wafer slicing", energy: 12, water: 800, detail: "Pure silicon ingots are sliced into 300mm wafers under nitrogen atmosphere." },
@@ -49,8 +49,8 @@ export function Manufacturing() {
     <SectionShell
       id="manufacturing"
       index={2}
-      kicker="Chapter 02 · Fab"
-      title="Inside the clean room."
+      kicker="Section 02 · Manufacturing"
+      title="Turning Materials into Hardware"
       description="A single fab consumes roughly 38 million litres of ultra-pure water a day. In 2020 Taiwan's chip sector used more electricity than the whole island generated from renewables — on a grid still ~45% coal."
     >
       <div className="grid gap-6 lg:grid-cols-5">
@@ -155,6 +155,29 @@ export function Manufacturing() {
             <StatCard value="70.6M m³" label="TSMC water use, 2015–20" hint="+108% in 6 years" />
           </div>
         </div>
+      </div>
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <InfoBlock title="Scale & Market Concentration" citations={[2, 3, 11]}>
+          <p>The global semiconductor market reached <strong>$550 billion</strong> in 2021 — growing 26.2% year-over-year — with wafer fabrication alone accounting for $107.5 billion. AI accelerator hardware is one of the fastest-growing segments: peak FLOPs in Google's TPU line climbed roughly <strong>7× between TPU v4i (2020) and v6e (2024)</strong>, while manufacturing emissions per chip grew 1.5 to 4× higher than earlier literature had assumed.</p>
+          <p>As electricity grids get cleaner, manufacturing's share of a chip's total lifetime emissions grows. In a hypothetical 90% carbon-free energy scenario, operational and embodied emissions would each make up roughly <strong>half</strong> of lifetime emissions. This means reducing manufacturing emissions is as important as running data centers on clean power — and harder, because no single company can solve it alone.</p>
+        </InfoBlock>
+
+        <InfoBlock title="Taiwan: The World's Chip Floor" citations={[2, 11]}>
+          <p>Taiwan produced <strong>63% of global IC foundry output</strong> in 2021, and <GlossaryTerm term="TSMC" definition="Taiwan Semiconductor Manufacturing Company — the world's largest dedicated chip foundry. As of mid-2025 it holds ~67.6% of global foundry revenue." />'s market share has since risen to ~67.6% (mid-2025). This geographic concentration means environmental burdens are also concentrated in a small, densely populated territory. Taiwan's energy mix in 2020 was 45.3% coal and only 5.9% renewables — yet the electronics subsector consumed 50.73 TWh that year, more than three times Taiwan's total renewable electricity generation.</p>
+          <p>Water stress is equally acute. TSMC's water consumption grew <strong>108% between 2015 and 2020</strong>, reaching 70.6 million cubic metres. TSMC factories draw ~10.3% of the daily supply from local reservoirs. During the 2020–2021 drought, TSMC trucked in hundreds of water tankers to keep fabs running while national household water restrictions were imposed across the island.</p>
+        </InfoBlock>
+
+        <InfoBlock title="Emissions Are Growing, Not Shrinking" citations={[1, 3]}>
+          <p>Newer AI chips are <strong>more carbon-intensive in absolute terms</strong>, even as computational efficiency improves. The TPU v5p emits 796 kg CO₂e in manufacturing — nearly 2.8× the TPU v4i's 285 kg. <GlossaryTerm term="Memory" definition="HBM (High Bandwidth Memory) and DRAM modules attached to AI accelerators. Memory accounts for ~38% of total manufacturing CO₂e in Google's TPU analysis — often overlooked compared to the chip itself." /> accounts for ~38% of total manufacturing emissions; the TPU v6e's higher footprint partly reflects a 3× increase in host DRAM (512 GB → 1,536 GB).</p>
+          <p>Fabrication also uses <GlossaryTerm term="perfluorocarbon gases" definition="PFCs including SF₆, NF₃, CF₄, and CHF₃ — used for chip etching and chamber cleaning. These are potent greenhouse gases with global warming potentials thousands of times higher than CO₂. If not abated, they vent to the atmosphere." /> (SF₆, NF₃, CF₄) for etching and chamber cleaning. Even with improved abatement (95% → 99% efficiency), electricity-related Scope 2 emissions grow as semiconductor demand expands. As grids decarbonize, manufacturing's share of a chip's lifetime footprint will only increase — making supply-chain decarbonization critical.</p>
+        </InfoBlock>
+      </div>
+
+      <div className="mt-6">
+        <InfoBlock title="Mitigation Pathways" citations={[1, 4]}>
+          <p><GlossaryTerm term="Compute Carbon Intensity" definition="CCI — measured in grams of CO₂ equivalent per ExaFLOP. Tracks how much carbon it costs to run a given amount of computation. Lower is better. Improved 3× from TPU v4i to v6e in just 4 years." /> (CCI) improved 3× from TPU v4i to v6e over four years. Combined hardware improvements, 90% carbon-free energy, and software gains could plausibly deliver <strong>~20× reduction in carbon per AI workload</strong>. Nanofiltration membranes achieve over 97% rejection of <GlossaryTerm term="PFAS" definition="Per- and polyfluoroalkyl substances — 'forever chemicals' used in semiconductor etching. They persist in water and soil for centuries and are linked to cancer, immune disruption, and developmental harm in communities near fabs." /> from semiconductor fabrication wastewater, with 90% water recovery at pilot scale. Google's Zero Waste to Landfill strategy targets material recovery, which can offset embodied emissions by up to 4% in closed-loop systems.</p>
+          <p>Policy interventions could include: mandating environmental impact assessments before new fab construction; requiring disclosure of <em>location-based</em> emissions data (rather than headquarters-level totals, which obscure the true footprint of coal-heavy grids like Taiwan's); and international cooperation to decarbonize the entire semiconductor supply chain — not just the companies that sell the finished chips.</p>
+        </InfoBlock>
       </div>
     </SectionShell>
   );

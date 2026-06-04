@@ -56,11 +56,48 @@ export function SectionShell({ id, index, kicker, title, description, children }
           </p>
         </div>
         <div className="hidden font-mono text-[10px] uppercase tracking-widest text-muted-foreground md:block">
-          chapter / {index} of 5
+          section / {index} of 5
         </div>
       </motion.div>
       {children}
     </section>
+  );
+}
+
+export function InfoBlock({
+  title,
+  children,
+  citations,
+}: {
+  title: string;
+  children: ReactNode;
+  citations?: number[];
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="glass rounded-2xl p-6"
+    >
+      <div className="text-xs uppercase tracking-widest text-neon mb-4">{title}</div>
+      <div className="space-y-3 text-sm text-foreground/85 leading-relaxed">
+        {children}
+      </div>
+      {citations && (
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {citations.map((n) => (
+            <a
+              key={n}
+              href={`#ref-${n}`}
+              className="rounded-full bg-neon/10 px-2 py-0.5 text-[10px] font-mono text-neon/70 hover:text-neon transition-colors"
+            >
+              [{n}]
+            </a>
+          ))}
+        </div>
+      )}
+    </motion.div>
   );
 }
 

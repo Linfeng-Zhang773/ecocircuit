@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { SectionShell, StatCard, GlossaryTerm } from "./SectionShell";
+import { SectionShell, StatCard, GlossaryTerm, InfoBlock } from "./SectionShell";
 
 const HOTSPOTS = [
   { id: "drc", name: "DR Congo", material: "Cobalt", x: 53, y: 58, impact: "70% of mined cobalt · ~half of reserves", danger: "high" },
@@ -53,8 +53,8 @@ export function MaterialExtraction() {
     <SectionShell
       id="extraction"
       index={1}
-      kicker="Chapter 01 · Earth"
-      title="Where your chip is born."
+      kicker="Section 01 · Material Extraction"
+      title="The Beginning of AI Hardware's Environmental Footprint"
       description={<>Every AI model runs on minerals torn from the ground. <GlossaryTerm term="Cobalt" definition="A metal critical for battery cathodes. ~70% is mined in the DRC under dangerous, exploitative conditions." />, <GlossaryTerm term="lithium" definition="Powers rechargeable cells. Brine mining in Chile and Argentina drains millions of liters of water in arid regions." />, and <GlossaryTerm term="rare earths" definition="A group of 17 elements essential for magnets, semiconductors, and displays. China refines ~70% of global supply." /> travel thousands of kilometres before becoming silicon.</>}
     >
       <div className="grid gap-6 lg:grid-cols-5">
@@ -135,6 +135,25 @@ export function MaterialExtraction() {
           <StatCard value="270" label="Killed, Brumadinho dam" hint="Brazil, 2019" />
           <StatCard value="10–20%" label="Silicosis in silica miners" hint="India · S. Africa · China" />
         </div>
+      </div>
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <InfoBlock title="Geographic Concentration & the Supply Chain Divide" citations={[1, 6]}>
+          <p>The <GlossaryTerm term="DRC" definition="Democratic Republic of Congo — holds ~50% of the world's cobalt reserves and produces 70% of mined cobalt. Despite this resource wealth, the DRC remains one of the world's poorest countries." /> holds half of the world's cobalt reserves and produces 70% of mined cobalt. China refines roughly 70% of global rare earth production and holds ~40% of reserves. These countries bear the full environmental and health costs of extraction while multinational corporations headquartered in the US, EU, and Japan capture most of the economic value. One study of African mining terms this <em>"extractive imperialism"</em> — foreign capital externalizes environmental costs onto African landscapes and communities who are made to subsidize the wealth of transnational businesses.</p>
+          <p>A chip's components cross international borders approximately 70 times and travel over 50,000 km before reaching a data center. Ore mined in Africa is shipped to China for refining, then sold as battery chemicals to tech firms across the West — a supply chain divide that mirrors centuries of colonial resource extraction. The DRC, despite its mineral wealth, remains poverty-stricken.</p>
+        </InfoBlock>
+
+        <InfoBlock title="Tailings, Disasters & Deforestation" citations={[5, 6]}>
+          <p>Mining produces more than <strong>14 billion metric tons of tailings per year</strong> — fine residues containing cyanide compounds, flotation chemicals, and heavy metals. In 2019, Brazil's Brumadinho iron ore tailings dam collapsed, killing 270 people and contaminating rivers across a wide region. In 2014, Canada's Mount Polley copper mine released 25 million cubic metres of tailings into nearby lakes and rivers, altering riverbeds and displacing communities.</p>
+          <p>Indonesia, Brazil, Ghana, and Suriname account for <strong>80% of deforestation caused by industrial mining demand</strong>. In Brazil, illegal mines intentionally burn forest on Indigenous lands for access — producing pollution at two to four times above WHO recommendations, affecting tens of millions of people in the Amazon region. Indigenous communities face disproportionate health impacts due to pre-existing conditions and reduced healthcare access, worsening existing inequalities.</p>
+        </InfoBlock>
+      </div>
+
+      <div className="mt-6">
+        <InfoBlock title="Silica Mining, Worker Health & the Coming Mineral Crunch" citations={[6, 9, 10]}>
+          <p>Silicon is the backbone of all AI chips — but refining silica into semiconductor-grade material comes at a serious environmental cost. In silica mining zones, soil organic carbon decreases by <strong>50–70%</strong> and vegetation cover drops ~65% compared to control sites. Washing and classifying silica ore requires 4,500–6,000 gallons of water per minute (6.5–8.6 million litres per day). Long-term workers face silicosis rates of <strong>10–20%</strong> and tuberculosis co-infection rates up to 40%. In India's Shankargarh region, 57 officially leased mines covering 206 acres were accompanied by illegal operations spanning more than 2,000 acres — producing barren wastelands and contaminated water.</p>
+          <p>The mineral demand driven by AI is accelerating fast. By 2030, AI data centers are projected to account for approximately <strong>2% of global copper and silicon demand</strong>, over 3% for rare earth elements, and a significant <strong>11% of global gallium demand</strong>. This surge is shifting supply chain pressure from electric vehicles to AI infrastructure — with policymakers warning of potential shortages and intensified competition for resources that are already extracted under inequitable and environmentally destructive conditions.</p>
+        </InfoBlock>
       </div>
 
       {/* Mini match game */}

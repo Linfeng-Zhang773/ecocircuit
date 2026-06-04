@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SectionShell, StatCard, GlossaryTerm } from "./SectionShell";
+import { SectionShell, StatCard, GlossaryTerm, InfoBlock } from "./SectionShell";
 
 const ITEMS = [
   { id: "phone", name: "Smartphone", bin: "recycle" },
@@ -55,8 +55,8 @@ export function EWaste() {
     <SectionShell
       id="ewaste"
       index={4}
-      kicker="Chapter 04 · Afterlife"
-      title="The mountain we keep building."
+      kicker="Section 04 · E-Waste"
+      title="The End of AI Hardware's Life Cycle"
       description={<>62 million tons of <GlossaryTerm term="e-waste" definition="Electronic waste — discarded devices, components, and infrastructure. Includes GPUs, phones, cables, batteries, and server equipment. Only 22.3% is formally recycled globally." /> leave our pockets and racks every year. Less than a quarter is formally recycled — the rest leaks heavy metals into soil and water.</>}
     >
       <div className="grid gap-6 lg:grid-cols-5">
@@ -232,6 +232,25 @@ export function EWaste() {
             </motion.div>
           )}
         </div>
+      </div>
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <InfoBlock title="Toxic Materials & the Recycling Myth" citations={[6, 7, 8]}>
+          <p>AI hardware contains <GlossaryTerm term="lead" definition="A heavy metal used in solder on circuit boards. Causes neurological damage, especially in children. Banned from many consumer products in the EU under RoHS, but still present in older hardware." />, mercury, cadmium, <GlossaryTerm term="brominated flame retardants" definition="BFRs are added to circuit boards and plastic casings to reduce fire risk. When burned during informal recycling, they release toxic dioxins and furans that accumulate in human tissue." />, and rare earth metals. When improperly recycled or burned, these substances leak into soil, air, and water. A substantial portion of 'recycled' electronics from wealthy countries is exported to Ghana, Nigeria, and India, where workers — including children — disassemble devices by hand using <GlossaryTerm term="acid stripping" definition="A recycling method where circuit boards are dissolved in acid baths to recover gold and copper. Produces highly toxic waste streams that contaminate nearby water sources when unregulated." /> and open burning in unsafe conditions.</p>
+          <p>Even when companies certify hardware as 'recycled,' this does not guarantee responsible handling. The WHO identifies informal e-waste recycling as a major source of toxic chemical exposure. Rich countries and corporations externalize disposal costs onto poorer countries with cheaper labor and weaker enforcement — the same structural pattern seen throughout the AI hardware supply chain.</p>
+        </InfoBlock>
+
+        <InfoBlock title="Planned Obsolescence & the AI Upgrade Cycle" citations={[8, 9]}>
+          <p>Unlike a consumer laptop that can last 5–7 years, enterprise AI hardware is replaced every <strong>2–4 years</strong> as companies compete for GPU and TPU performance. A single data center refresh can discard thousands of hardware units simultaneously — true industrial-scale waste, distinct from consumer electronics. AI models increasingly require faster processors, more memory bandwidth, and denser infrastructure, making longevity economically undesirable for operators.</p>
+          <p>The AI e-waste stream includes <GlossaryTerm term="GPUs" definition="Graphics Processing Units — the primary hardware used to train and run AI models. A single GPU cluster for large language model training may contain thousands of units, all replaced on short cycles." />, CPUs, storage drives, networking equipment, power supply systems, server racks, cooling electronics, backup battery systems, and printed circuit boards. Unlike a smartphone, these are industrial assets — one data center refresh generates the equivalent e-waste of tens of thousands of consumer devices simultaneously.</p>
+        </InfoBlock>
+      </div>
+
+      <div className="mt-6">
+        <InfoBlock title="Policy Responses & Potential Solutions" citations={[6, 7, 8]}>
+          <p>Solutions to AI e-waste require structural intervention, not just individual recycling choices. Key approaches include: <strong>Extended Producer Responsibility (EPR)</strong> laws that hold manufacturers financially liable for end-of-life hardware; binding international rules to stop the export of e-waste to countries with weaker environmental enforcement; designing hardware explicitly for disassembly, repair, and component recovery; and mandating that companies publicly disclose the lifecycle waste footprint of their AI infrastructure.</p>
+          <p>The <GlossaryTerm term="EU WEEE Directive" definition="Waste Electrical and Electronic Equipment Directive — EU legislation requiring member states to collect and recycle e-waste. Sets targets for collection rates and restricts hazardous substances in electronics sold in the EU." /> and similar national frameworks create minimum standards, but enforcement outside wealthy nations remains weak. The WHO calls for urgent global cooperation on e-waste given the severe health consequences — particularly for children in informal recycling communities who face exposure to lead, mercury, cadmium, and dioxins from open burning and acid stripping.</p>
+        </InfoBlock>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">

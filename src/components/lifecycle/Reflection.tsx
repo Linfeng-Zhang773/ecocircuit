@@ -60,8 +60,8 @@ export function Reflection({ onRestart }: { onRestart?: () => void }) {
     <SectionShell
       id="reflection"
       index={5}
-      kicker="Chapter 05 · Future"
-      title="What can we actually do?"
+      kicker="Section 05 · Solutions"
+      title="What Can We Actually Do?"
       description="AI is here. The question is whether the next decade of compute is extractive — or circular. Pick the futures you'd back."
     >
       <div className="grid gap-6 lg:grid-cols-5">

@@ -6,6 +6,8 @@ import { Manufacturing } from "@/components/lifecycle/Manufacturing";
 import { Distribution } from "@/components/lifecycle/Distribution";
 import { EWaste } from "@/components/lifecycle/EWaste";
 import { Reflection } from "@/components/lifecycle/Reflection";
+import { References } from "@/components/lifecycle/References";
+import { Conclusion } from "@/components/lifecycle/Conclusion";
 import { ProgressNav } from "@/components/lifecycle/ProgressNav";
 
 export const Route = createFileRoute("/")({
@@ -41,9 +43,10 @@ function Index() {
       <Distribution key={`dist-${sessionKey}`} />
       <EWaste key={`ew-${sessionKey}`} />
       <Reflection key={`ref-${sessionKey}`} onRestart={handleRestart} />
+      <Conclusion />
+      <References />
       <footer className="border-t border-neon/10 py-10 text-center text-xs text-muted-foreground">
-        <div className="font-mono uppercase tracking-widest">silicon footprint · interactive exhibit · v1.0</div>
-        <div className="mt-2">Figures from &quot;The Hidden Costs of AI: Hardware Production &amp; Supply Chains&quot; · UCSD, 2026</div>
+        <div className="font-mono uppercase tracking-widest">The Hidden Costs of AI · Hardware Production &amp; Supply Chains</div>
       </footer>
     </main>
   );
